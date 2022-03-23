@@ -5,9 +5,13 @@ import sk.stuba.fei.uim.oop.tiles.card.Card;
 import java.util.ArrayList;
 
 public class Player {
-    private int playerID;
+    private final int playerID;
     private int lives = 5;
     private ArrayList<Card> cardsInHand;
+
+    public Player(int num){
+        playerID = num;
+    }
 
     public void loseLife(){
         this.lives -= 1;
@@ -15,10 +19,6 @@ public class Player {
 
     public void addCardToHand(Card card){
         this.cardsInHand.add(card);
-    }
-
-    public void assignPlayerNum(int num){
-        this.playerID = num;
     }
 
     public int getPlayerID(){
