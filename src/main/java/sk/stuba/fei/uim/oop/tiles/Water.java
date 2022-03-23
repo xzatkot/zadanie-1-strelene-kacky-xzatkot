@@ -5,4 +5,7 @@ public class Water extends Tile {
     public String getName(){
         return this.name;
     }
+    public Water(){
+        super.owner=0;
+    }
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Player {
     private final int playerID;
     private int lives = 5;
-    private ArrayList<Card> cardsInHand;
+    private ArrayList<Card> cardsInHand = new ArrayList<>();
 
     public Player(int num){
         playerID = num;

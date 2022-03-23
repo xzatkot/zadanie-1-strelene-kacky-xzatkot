@@ -10,14 +10,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Game {
+    int numOfPlayers;
     public ArrayList<Tile> pond = new ArrayList<>();
     public ArrayList<Tile> tileCardsStack = new ArrayList<>();
     public ArrayList<Card> cardStack = new ArrayList<>();
+    public ArrayList<Player> players = new ArrayList<>();
     public boolean[] crosshairArray = {false, false, false, false, false, false};
 
     public Game() {
         System.out.println("**** Strelene kacky ****");
-        int numOfPlayers = ZKlavesnice.readInt("Zadaj pocet hracov: ");
+        this.numOfPlayers = ZKlavesnice.readInt("Zadaj pocet hracov: ");
+        initialiseTileCards(this.numOfPlayers);
+        createCardStack();
+        startPond();
+        initialisePlayers(this.numOfPlayers);
+        dealCards();
+
+        while(this.getWinner() == 0){
+            //TODO
+        }
+        int winner = this.getWinner();
     }
 
     public boolean getBoolValue(int index){
@@ -41,8 +53,14 @@ public class Game {
 
     public void startPond(){
         for (int i=0;i<6;i++){
-            this.pond.add(this.tileCardsStack.get(i));
+            this.pond.add(this.tileCardsStack.get(0));
+            this.tileCardsStack.remove(0);
         }
+    }
+
+    public void addCardToPond(){
+        this.pond.add(this.tileCardsStack.get(0));
+        this.tileCardsStack.remove(0);
     }
 
     public void createCardStack(){
@@ -64,5 +82,37 @@ public class Game {
         }
         this.cardStack.add(new DuckDance());
         Collections.shuffle(this.cardStack);
+    }
+
+    public int getWinner() {
+        int activePlayers = 0;
+        int winner = 0;
+        for (int i = 0; i < this.numOfPlayers; i++) {
+            if (players.get(i).getLives() > 0) {
+                activePlayers += 1;
+                winner = i;
+            }
+        }
+        if (activePlayers == 1) {
+            return winner;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public void initialisePlayers(int numOfPlayers){
+        for (int i=0;i<numOfPlayers;i++){
+            this.players.add(new Player(i));
+        }
+    }
+
+    public void dealCards(){
+        for (int i=0;i<this.numOfPlayers;i++){
+            for (int j=0;j<3;j++){
+                this.players.get(i).addCardToHand(this.cardStack.get(0));
+                this.cardStack.remove(0);
+            }
+        }
     }
 }

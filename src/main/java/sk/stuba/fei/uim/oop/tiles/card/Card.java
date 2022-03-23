@@ -1,7 +1,7 @@
 package sk.stuba.fei.uim.oop.tiles.card;
 
-import sk.stuba.fei.uim.oop.player.Player;
+import sk.stuba.fei.uim.oop.game.Game;
 
 public abstract class Card {
-    public abstract void activate(Player player);
+    public abstract void activate(Game game);
 }
