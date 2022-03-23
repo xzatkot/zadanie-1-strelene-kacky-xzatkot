@@ -4,9 +4,13 @@ import sk.stuba.fei.uim.oop.game.Game;
 import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 
 public class WildBill extends Card {
+    public final String name = "Divoky Bill";
+    public WildBill(){
+        super.name = this.name;
+    }
     @Override
     public void activate(Game game) {
-        int index = ZKlavesnice.readInt("Prosim vyber kacku na odstrel: ");
+        int index = ZKlavesnice.readInt("Prosim vyber kacku na odstrel: ")-1;
 
         game.crosshairArray[index] = false;
         game.cardStack.add(new Aim());

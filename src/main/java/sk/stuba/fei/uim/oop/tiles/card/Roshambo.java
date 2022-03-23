@@ -7,6 +7,10 @@ import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 import java.util.Collections;
 
 public class Roshambo extends Card {
+    public final String name = "Rosambo";
+    public Roshambo(){
+        super.name = this.name;
+    }
     @Override
     public void activate(Game game) {
         Collections.shuffle(game.pond);

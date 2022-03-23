@@ -19,15 +19,31 @@ public class Game {
 
     public Game() {
         System.out.println("**** Strelene kacky ****");
-        this.numOfPlayers = ZKlavesnice.readInt("Zadaj pocet hracov: ");
+        this.numOfPlayers = ZKlavesnice.readInt("Zadaj pocet hracov (2-6): ");
         initialiseTileCards(this.numOfPlayers);
         createCardStack();
         startPond();
         initialisePlayers(this.numOfPlayers);
         dealCards();
 
+        int turn = 0;
+
         while(this.getWinner() == 0){
-            //TODO
+            int playerTurn = turn % this.numOfPlayers;
+            System.out.println();
+            System.out.println("################################");
+            printLives();
+            System.out.println("Na tahu je hrac cislo " + (playerTurn+1));
+            printPond();
+            this.players.get(playerTurn).printCardsInHand();
+            System.out.println();
+            int cardPlayed = ZKlavesnice.readInt("Vyber kartu ktoru chces zahrat: ")-1;
+            this.players.get(playerTurn).cardsInHand.get(cardPlayed).activate(this);
+            this.players.get(playerTurn).removeCard(cardPlayed);
+            this.players.get(playerTurn).addCardToHand(this.cardStack.get(0));
+            this.cardStack.remove(0);
+
+            turn++;
         }
         int winner = this.getWinner();
     }
@@ -113,6 +129,24 @@ public class Game {
                 this.players.get(i).addCardToHand(this.cardStack.get(0));
                 this.cardStack.remove(0);
             }
+        }
+    }
+
+    public void printPond(){
+        for (int i=0;i<6;i++){
+            System.out.print((i+1) + ".  ");
+            if(this.crosshairArray[i]){
+                System.out.print("Zamierene      ");
+            }
+            else{
+                System.out.print("Nezamierene    ");
+            }
+            System.out.println(this.pond.get(i).getName());
+        }
+    }
+    public void printLives(){
+        for (int i=0;i<this.numOfPlayers;i++){
+            System.out.println("Hrac c. " + this.players.get(i).getPlayerID() + "    zivoty: " + this.players.get(i).getLives());
         }
     }
 }

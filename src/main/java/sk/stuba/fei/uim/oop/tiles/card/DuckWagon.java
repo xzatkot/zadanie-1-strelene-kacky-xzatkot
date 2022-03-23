@@ -5,6 +5,10 @@ import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 import sk.stuba.fei.uim.oop.tiles.Tile;
 
 public class DuckWagon extends Card {
+    public final String name = "Kacaci pochod";
+    public DuckWagon(){
+        super.name = this.name;
+    }
     @Override
     public void activate(Game game) {
         Tile temp = game.pond.get(0);

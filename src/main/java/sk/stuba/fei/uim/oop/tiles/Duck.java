@@ -7,6 +7,7 @@ public class Duck extends Tile {
         this.owner = playerNum;
         super.owner = playerNum;
         this.name += playerNum;
+        super.name = this.name;
     }
 
     public int getOwner() {
