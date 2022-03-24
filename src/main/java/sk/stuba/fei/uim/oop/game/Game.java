@@ -15,6 +15,7 @@ public class Game {
     public ArrayList<Tile> pond = new ArrayList<>();
     public ArrayList<Tile> tileCardsStack = new ArrayList<>();
     public ArrayList<Card> cardStack = new ArrayList<>();
+    public ArrayList<Card> usedCards = new ArrayList<>();
     public ArrayList<Player> players = new ArrayList<>();
     public boolean[] crosshairArray = {false, false, false, false, false, false};
 
@@ -32,7 +33,7 @@ public class Game {
         while(this.getWinner() == 0){
             int playerTurn = turn % this.numOfPlayers;
             System.out.println();
-            System.out.println("################################");
+            System.out.println("##################################");
             printLives();
             System.out.println("Player " + (playerTurn+1) + "'s turn");
             printPond();
@@ -47,7 +48,7 @@ public class Game {
             turn++;
         }
         int winner = this.getWinner();
-        System.out.println("Player " + winner+1 + " wins!");
+        System.out.println("Player " + (winner+1) + " wins!");
     }
 
     public void checkDeadPlayers(){
@@ -72,6 +73,11 @@ public class Game {
 
     public void playCard(int playerTurn){
         System.out.println();
+        if (this.cardStack.size() == 0){
+            this.cardStack.addAll(this.usedCards);
+            Collections.shuffle(this.cardStack);
+            this.usedCards.clear();
+        }
         if (!isPlayable(playerTurn)){
             this.cardStack.add(this.players.get(playerTurn).cardsInHand.get(0));
             this.players.get(playerTurn).cardsInHand.remove(0);
@@ -82,6 +88,7 @@ public class Game {
         }
         int cardPlayed = ZKlavesnice.readInt("Choose which card to play: ")-1;
         this.players.get(playerTurn).cardsInHand.get(cardPlayed).activate(this);
+        this.usedCards.add(this.players.get(playerTurn).cardsInHand.get(cardPlayed));
         this.players.get(playerTurn).removeCard(cardPlayed);
         this.players.get(playerTurn).addCardToHand(this.cardStack.get(0));
         this.cardStack.remove(0);
@@ -111,9 +118,6 @@ public class Game {
 
     public boolean getBoolValue(int index){
         return crosshairArray[index];
-    }
-    public void setBoolValue(int index){
-        crosshairArray[index] = true;
     }
 
     public void initialiseTileCards(int numOfPlayers){

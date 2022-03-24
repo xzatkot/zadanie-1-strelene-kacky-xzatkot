@@ -2,7 +2,8 @@ package sk.stuba.fei.uim.oop.tiles.card;
 
 import sk.stuba.fei.uim.oop.game.Game;
 import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
-import sk.stuba.fei.uim.oop.tiles.*;
+
+import java.util.Objects;
 
 public class Shoot extends Card {
     public final String name = "Shoot";
@@ -13,14 +14,18 @@ public class Shoot extends Card {
     public void activate(Game game) {
         int index = ZKlavesnice.readInt("Select the duck to shoot at: ")-1;
 
-        while(!game.getBoolValue(index) && (game.pond.get(index).getOwner() != 0)){
+        while(!game.getBoolValue(index) || 0>index || index>6){
             index = ZKlavesnice.readInt("Select the duck to shoot at: ")-1;
         }
 
         game.crosshairArray[index] = false;
+        if (Objects.equals(game.pond.get(index).getName(), "Water")){
+            System.out.println("You fired at water.");
+            game.usedCards.add(new Shoot());
+            return;
+        }
         game.players.get(game.pond.get(index).getOwner()-1).loseLife();
         game.pond.remove(index);
-        game.pond.add(game.tileCardsStack.get(0));
-        game.tileCardsStack.remove(0);
+        game.addCardToPond();
     }
 }

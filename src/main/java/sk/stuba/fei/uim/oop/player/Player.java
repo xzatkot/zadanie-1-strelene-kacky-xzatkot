@@ -1,7 +1,6 @@
 package sk.stuba.fei.uim.oop.player;
 
 import sk.stuba.fei.uim.oop.tiles.card.Card;
-import sk.stuba.fei.uim.oop.game.Game;
 
 import java.util.ArrayList;
 
