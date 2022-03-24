@@ -12,9 +12,9 @@ public class WildBill extends Card {
     }
     @Override
     public void activate(Game game) {
-        int index = ZKlavesnice.readInt("Select the duck to kill: ")-1;
+        int index = ZKlavesnice.readInt("Select a duck to kill: ")-1;
         while (0>index || index>6){
-            index = ZKlavesnice.readInt("Select the duck to kill: ")-1;
+            index = ZKlavesnice.readInt("Index out of range: ")-1;
         }
 
         if (Objects.equals(game.pond.get(index).getName(), "Water")){

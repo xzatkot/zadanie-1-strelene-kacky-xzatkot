@@ -78,6 +78,9 @@ public class Game {
             return;
         }
         int cardPlayed = ZKlavesnice.readInt("Choose which card to play: ")-1;
+        while(!isCardPlayable(this.players.get(playerTurn).cardsInHand.get(cardPlayed))){
+            cardPlayed = ZKlavesnice.readInt("Unable to play this card, please choose another: ")-1;
+        }
         this.players.get(playerTurn).cardsInHand.get(cardPlayed).activate(this);
         this.usedCards.add(this.players.get(playerTurn).cardsInHand.get(cardPlayed));
         this.players.get(playerTurn).removeCard(cardPlayed);
@@ -200,9 +203,24 @@ public class Game {
             System.out.println(this.pond.get(i).getName());
         }
     }
+
     public void printLives(){
         for (int i=0;i<this.numOfPlayers;i++){
             System.out.println("Player nr. " + this.players.get(i).getPlayerID() + "    lives: " + this.players.get(i).getLives());
         }
+    }
+
+    public boolean isCardPlayable(Card card){
+        if (Objects.equals(card.getName(), "Aim")){
+            if (this.crosshairArray[0] && this.crosshairArray[1] && this.crosshairArray[2] &&
+                    this.crosshairArray[3] && this.crosshairArray[4] && this.crosshairArray[5]) {
+                return false;
+            }
+        }
+        if (Objects.equals(card.getName(), "Shoot")){
+            return this.crosshairArray[0] || this.crosshairArray[1] || this.crosshairArray[2] ||
+                    this.crosshairArray[3] || this.crosshairArray[4] || this.crosshairArray[5];
+        }
+        return true;
     }
 }

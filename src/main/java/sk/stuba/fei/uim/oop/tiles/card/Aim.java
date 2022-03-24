@@ -13,7 +13,7 @@ public class Aim extends Card {
         int index = ZKlavesnice.readInt("Select the index of target: ")-1;
 
         while((game.getBoolValue(index) || 0>index || index>6)){
-            index = ZKlavesnice.readInt("Select the index of target: ")-1;
+            index = ZKlavesnice.readInt("Please select another target: ")-1;
         }
         game.crosshairArray[index] = true;
     }

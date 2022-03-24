@@ -12,10 +12,10 @@ public class Shoot extends Card {
     }
     @Override
     public void activate(Game game) {
-        int index = ZKlavesnice.readInt("Select the duck to shoot at: ")-1;
+        int index = ZKlavesnice.readInt("Select a duck to shoot at: ")-1;
 
         while(!game.getBoolValue(index) || 0>index || index>6){
-            index = ZKlavesnice.readInt("Select the duck to shoot at: ")-1;
+            index = ZKlavesnice.readInt("The duck has to be aimed at: ")-1;
         }
 
         game.crosshairArray[index] = false;
