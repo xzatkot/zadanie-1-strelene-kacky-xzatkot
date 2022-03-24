@@ -5,7 +5,7 @@ import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 import sk.stuba.fei.uim.oop.tiles.Tile;
 
 public class DuckWagon extends Card {
-    public final String name = "Kacaci pochod";
+    public final String name = "Duck wagon";
     public DuckWagon(){
         super.name = this.name;
     }

@@ -5,16 +5,16 @@ import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 import sk.stuba.fei.uim.oop.tiles.*;
 
 public class Shoot extends Card {
-    public final String name = "Vystrelit";
+    public final String name = "Shoot";
     public Shoot(){
         super.name = this.name;
     }
     @Override
     public void activate(Game game) {
-        int index = ZKlavesnice.readInt("Prosim zadaj index terca vystrelu: ")-1;
+        int index = ZKlavesnice.readInt("Select the duck to shoot at: ")-1;
 
         while(!game.getBoolValue(index) && (game.pond.get(index).getOwner() != 0)){
-            index = ZKlavesnice.readInt("Prosim zadaj index terca vystrelu: ")-1;
+            index = ZKlavesnice.readInt("Select the duck to shoot at: ")-1;
         }
 
         game.crosshairArray[index] = false;

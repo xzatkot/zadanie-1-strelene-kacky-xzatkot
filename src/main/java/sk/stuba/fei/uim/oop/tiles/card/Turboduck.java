@@ -5,13 +5,13 @@ import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 import sk.stuba.fei.uim.oop.tiles.Tile;
 
 public class Turboduck extends Card {
-    public final String name = "Turbokacka";
+    public final String name = "Turboduck";
     public Turboduck(){
         super.name = this.name;
     }
     @Override
     public void activate(Game game) {
-        int index = ZKlavesnice.readInt("Prosim vyber turbokacku: ")-1;
+        int index = ZKlavesnice.readInt("Please select the turboduck: ")-1;
 
         Tile temp = game.pond.get(index);
         for (int i=index;i>0;i--){

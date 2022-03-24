@@ -6,7 +6,7 @@ import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 import java.util.Collections;
 
 public class DuckDance extends Card {
-    public final String name = "Kacaci tanec";
+    public final String name = "Duck dance";
     public DuckDance(){
         super.name = this.name;
     }

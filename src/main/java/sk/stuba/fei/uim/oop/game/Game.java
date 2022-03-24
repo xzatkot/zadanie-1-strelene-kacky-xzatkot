@@ -8,7 +8,6 @@ import sk.stuba.fei.uim.oop.player.Player;
 import sk.stuba.fei.uim.oop.tiles.card.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 public class Game {
@@ -20,8 +19,8 @@ public class Game {
     public boolean[] crosshairArray = {false, false, false, false, false, false};
 
     public Game() {
-        System.out.println("**** Strelene kacky ****");
-        this.numOfPlayers = ZKlavesnice.readInt("Zadaj pocet hracov (2-6): ");
+        System.out.println("**** Duck Hunt ****");
+        this.numOfPlayers = ZKlavesnice.readInt("Enter number of players (2-6): ");
         initialiseTileCards(this.numOfPlayers);
         createCardStack();
         startPond();
@@ -35,7 +34,7 @@ public class Game {
             System.out.println();
             System.out.println("################################");
             printLives();
-            System.out.println("Na tahu je hrac cislo " + (playerTurn+1));
+            System.out.println("Player " + (playerTurn+1) + "'s turn");
             printPond();
             this.players.get(playerTurn).printCardsInHand();
             playCard(playerTurn);
@@ -48,7 +47,7 @@ public class Game {
             turn++;
         }
         int winner = this.getWinner();
-        System.out.println("Vyhrava hrac cislo " + winner+1 + "!");
+        System.out.println("Player " + winner+1 + " wins!");
     }
 
     public void checkDeadPlayers(){
@@ -78,10 +77,10 @@ public class Game {
             this.players.get(playerTurn).cardsInHand.remove(0);
             this.players.get(playerTurn).addCardToHand(this.cardStack.get(0));
             this.cardStack.remove(0);
-            System.out.println("Ziadny mozny logicky tah, bola zahodena karta a potiahnuta nova.");
+            System.out.println("No logical option available, a card has been replaced.");
             return;
         }
-        int cardPlayed = ZKlavesnice.readInt("Vyber kartu ktoru chces zahrat: ")-1;
+        int cardPlayed = ZKlavesnice.readInt("Choose which card to play: ")-1;
         this.players.get(playerTurn).cardsInHand.get(cardPlayed).activate(this);
         this.players.get(playerTurn).removeCard(cardPlayed);
         this.players.get(playerTurn).addCardToHand(this.cardStack.get(0));
@@ -98,15 +97,15 @@ public class Game {
             }
             allFalse++;
         }
-        if((Objects.equals(this.players.get(playerTurn).cardsInHand.get(0).getName(), "Zamierit")) &&
-                (Objects.equals(this.players.get(playerTurn).cardsInHand.get(1).getName(), "Zamierit")) &&
-                (Objects.equals(this.players.get(playerTurn).cardsInHand.get(2).getName(), "Zamierit")) &&
+        if((Objects.equals(this.players.get(playerTurn).cardsInHand.get(0).getName(), "Aim")) &&
+                (Objects.equals(this.players.get(playerTurn).cardsInHand.get(1).getName(), "Aim")) &&
+                (Objects.equals(this.players.get(playerTurn).cardsInHand.get(2).getName(), "Aim")) &&
                 allTrue == 6){
             return false;
         }
-        return (!Objects.equals(this.players.get(playerTurn).cardsInHand.get(0).getName(), "Vystrelit")) ||
-                (!Objects.equals(this.players.get(playerTurn).cardsInHand.get(1).getName(), "Vystrelit")) ||
-                (!Objects.equals(this.players.get(playerTurn).cardsInHand.get(2).getName(), "Vystrelit")) ||
+        return (!Objects.equals(this.players.get(playerTurn).cardsInHand.get(0).getName(), "Shoot")) ||
+                (!Objects.equals(this.players.get(playerTurn).cardsInHand.get(1).getName(), "Shoot")) ||
+                (!Objects.equals(this.players.get(playerTurn).cardsInHand.get(2).getName(), "Shoot")) ||
                 allFalse != 6;
     }
 
@@ -198,17 +197,17 @@ public class Game {
         for (int i=0;i<6;i++){
             System.out.print((i+1) + ".  ");
             if(this.crosshairArray[i]){
-                System.out.print("Zamierene      ");
+                System.out.print("Aimed at       ");
             }
             else{
-                System.out.print("Nezamierene    ");
+                System.out.print("Not aimed at   ");
             }
             System.out.println(this.pond.get(i).getName());
         }
     }
     public void printLives(){
         for (int i=0;i<this.numOfPlayers;i++){
-            System.out.println("Hrac c. " + this.players.get(i).getPlayerID() + "    zivoty: " + this.players.get(i).getLives());
+            System.out.println("Player nr. " + this.players.get(i).getPlayerID() + "    lives: " + this.players.get(i).getLives());
         }
     }
 }

@@ -7,7 +7,7 @@ import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
 import java.util.Collections;
 
 public class Roshambo extends Card {
-    public final String name = "Rosambo";
+    public final String name = "Roshambo";
     public Roshambo(){
         super.name = this.name;
     }
