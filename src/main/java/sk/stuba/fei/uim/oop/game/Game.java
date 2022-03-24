@@ -78,6 +78,9 @@ public class Game {
             return;
         }
         int cardPlayed = ZKlavesnice.readInt("Choose which card to play: ")-1;
+        while(cardPlayed<0 || cardPlayed>2){
+            cardPlayed = ZKlavesnice.readInt("Card index out of range: ")-1;
+        }
         while(!isCardPlayable(this.players.get(playerTurn).cardsInHand.get(cardPlayed))){
             cardPlayed = ZKlavesnice.readInt("Unable to play this card, please choose another: ")-1;
         }

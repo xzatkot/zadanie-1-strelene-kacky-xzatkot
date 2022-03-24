@@ -14,7 +14,7 @@ public class Aim extends Card {
     public void activate(Game game) {
         int index = ZKlavesnice.readInt("Select the index of target: ")-1;
 
-        while((game.getBoolValue(index) || 0>index || index>6)){
+        while(0>index || index>5 || game.getBoolValue(index)){
             index = ZKlavesnice.readInt("Please select another target: ")-1;
         }
         game.crosshairArray[index] = true;

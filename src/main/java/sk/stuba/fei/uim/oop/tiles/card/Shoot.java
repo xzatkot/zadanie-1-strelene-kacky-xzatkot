@@ -15,7 +15,7 @@ public class Shoot extends Card {
     public void activate(Game game) {
         int index = ZKlavesnice.readInt("Select a duck to shoot at: ")-1;
 
-        while(!game.getBoolValue(index) || 0>index || index>6){
+        while(0>index || index>5 || !game.getBoolValue(index)){
             index = ZKlavesnice.readInt("The duck has to be aimed at: ")-1;
         }
 

@@ -14,7 +14,7 @@ public class WildBill extends Card {
     @Override
     public void activate(Game game) {
         int index = ZKlavesnice.readInt("Select a duck to kill: ")-1;
-        while (0>index || index>6){
+        while (0>index || index>5){
             index = ZKlavesnice.readInt("Index out of range: ")-1;
         }
 

@@ -15,7 +15,7 @@ public class Turboduck extends Card {
     @Override
     public void activate(Game game) {
         int index = ZKlavesnice.readInt("Please select the turboduck: ")-1;
-        while (Objects.equals(game.pond.get(index).getName(), "Water") || 0>index || index>6){
+        while (0>index || index>5 || Objects.equals(game.pond.get(index).getName(), "Water")){
             index = ZKlavesnice.readInt("Only a duck can be a turboduck: ")-1;
         }
 
