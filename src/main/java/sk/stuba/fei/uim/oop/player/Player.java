@@ -30,6 +30,10 @@ public class Player {
         return this.lives;
     }
 
+    public boolean isAlive(){
+        return this.getLives() > 0;
+    }
+
     public void printCardsInHand() {
         for (int i=0; i<3;i++){
             System.out.print((i+1) + ". " + cardsInHand.get(i).getName() + "   ");

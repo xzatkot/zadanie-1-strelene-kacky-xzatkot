@@ -8,6 +8,8 @@ import sk.stuba.fei.uim.oop.player.Player;
 import sk.stuba.fei.uim.oop.tiles.card.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class Game {
     int numOfPlayers;
@@ -36,16 +38,76 @@ public class Game {
             System.out.println("Na tahu je hrac cislo " + (playerTurn+1));
             printPond();
             this.players.get(playerTurn).printCardsInHand();
+            playCard(playerTurn);
             System.out.println();
-            int cardPlayed = ZKlavesnice.readInt("Vyber kartu ktoru chces zahrat: ")-1;
-            this.players.get(playerTurn).cardsInHand.get(cardPlayed).activate(this);
-            this.players.get(playerTurn).removeCard(cardPlayed);
-            this.players.get(playerTurn).addCardToHand(this.cardStack.get(0));
-            this.cardStack.remove(0);
+            checkDeadPlayers();
+            if (this.getWinner() != 0){
+                break;
+            }
 
             turn++;
         }
         int winner = this.getWinner();
+        System.out.println("Vyhrava hrac cislo " + winner+1 + "!");
+    }
+
+    public void checkDeadPlayers(){
+        for (int i=0;i<this.numOfPlayers;i++){
+            if (!this.players.get(i).isAlive()){
+                for(int j=0;j<3;j++){
+                    this.cardStack.add(this.players.get(i).cardsInHand.get(j));
+                }
+                for (int k=0;k<this.pond.size();k++){
+                    if (this.pond.get(k).getOwner() == k+1){
+                        this.pond.remove(k);
+                    }
+                }
+                for (int l=0;l<this.tileCardsStack.size();l++){
+                    if (this.tileCardsStack.get(l).getOwner() == l+1){
+                        this.tileCardsStack.remove(l);
+                    }
+                }
+            }
+        }
+    }
+
+    public void playCard(int playerTurn){
+        System.out.println();
+        if (!isPlayable(playerTurn)){
+            this.cardStack.add(this.players.get(playerTurn).cardsInHand.get(0));
+            this.players.get(playerTurn).cardsInHand.remove(0);
+            this.players.get(playerTurn).addCardToHand(this.cardStack.get(0));
+            this.cardStack.remove(0);
+            System.out.println("Ziadny mozny logicky tah, bola zahodena karta a potiahnuta nova.");
+            return;
+        }
+        int cardPlayed = ZKlavesnice.readInt("Vyber kartu ktoru chces zahrat: ")-1;
+        this.players.get(playerTurn).cardsInHand.get(cardPlayed).activate(this);
+        this.players.get(playerTurn).removeCard(cardPlayed);
+        this.players.get(playerTurn).addCardToHand(this.cardStack.get(0));
+        this.cardStack.remove(0);
+    }
+
+    public boolean isPlayable(int playerTurn){
+        int allTrue = 0;
+        int allFalse = 0;
+        for (int i=0;i<6;i++){
+            if (this.crosshairArray[i]){
+                allTrue++;
+                continue;
+            }
+            allFalse++;
+        }
+        if((Objects.equals(this.players.get(playerTurn).cardsInHand.get(0).getName(), "Zamierit")) &&
+                (Objects.equals(this.players.get(playerTurn).cardsInHand.get(1).getName(), "Zamierit")) &&
+                (Objects.equals(this.players.get(playerTurn).cardsInHand.get(2).getName(), "Zamierit")) &&
+                allTrue == 6){
+            return false;
+        }
+        return (!Objects.equals(this.players.get(playerTurn).cardsInHand.get(0).getName(), "Vystrelit")) ||
+                (!Objects.equals(this.players.get(playerTurn).cardsInHand.get(1).getName(), "Vystrelit")) ||
+                (!Objects.equals(this.players.get(playerTurn).cardsInHand.get(2).getName(), "Vystrelit")) ||
+                allFalse != 6;
     }
 
     public boolean getBoolValue(int index){
