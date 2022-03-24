@@ -4,6 +4,7 @@ import sk.stuba.fei.uim.oop.game.Game;
 
 public abstract class Card {
     public String name;
+
     public abstract void activate(Game game);
 
     public String getName() {

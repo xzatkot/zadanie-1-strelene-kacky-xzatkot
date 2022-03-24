@@ -2,14 +2,15 @@ package sk.stuba.fei.uim.oop.tiles.card;
 
 import sk.stuba.fei.uim.oop.game.Game;
 import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
-
 import java.util.Objects;
 
 public class Shoot extends Card {
     public final String name = "Shoot";
+
     public Shoot(){
         super.name = this.name;
     }
+
     @Override
     public void activate(Game game) {
         int index = ZKlavesnice.readInt("Select a duck to shoot at: ")-1;

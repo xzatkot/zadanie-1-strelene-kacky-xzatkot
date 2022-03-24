@@ -1,14 +1,15 @@
 package sk.stuba.fei.uim.oop.tiles.card;
 
 import sk.stuba.fei.uim.oop.game.Game;
-
 import java.util.Collections;
 
 public class DuckDance extends Card {
     public final String name = "Duck dance";
+
     public DuckDance(){
         super.name = this.name;
     }
+
     @Override
     public void activate(Game game) {
         for (int i=0;i<6;i++){

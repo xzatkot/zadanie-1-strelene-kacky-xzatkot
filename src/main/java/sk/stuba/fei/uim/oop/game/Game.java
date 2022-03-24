@@ -206,7 +206,8 @@ public class Game {
 
     public void printLives(){
         for (int i=0;i<this.numOfPlayers;i++){
-            System.out.println("Player nr. " + this.players.get(i).getPlayerID() + "    lives: " + this.players.get(i).getLives());
+            System.out.println("Player nr. " + this.players.get(i).getPlayerID() + "    lives: " +
+                    this.players.get(i).getLives());
         }
     }
 

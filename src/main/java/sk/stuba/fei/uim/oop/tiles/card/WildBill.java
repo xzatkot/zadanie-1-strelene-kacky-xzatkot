@@ -2,14 +2,15 @@ package sk.stuba.fei.uim.oop.tiles.card;
 
 import sk.stuba.fei.uim.oop.game.Game;
 import sk.stuba.fei.uim.oop.utility.ZKlavesnice;
-
 import java.util.Objects;
 
 public class WildBill extends Card {
     public final String name = "Wild Bill";
+
     public WildBill(){
         super.name = this.name;
     }
+
     @Override
     public void activate(Game game) {
         int index = ZKlavesnice.readInt("Select a duck to kill: ")-1;

@@ -1,7 +1,6 @@
 package sk.stuba.fei.uim.oop.player;
 
 import sk.stuba.fei.uim.oop.tiles.card.Card;
-
 import java.util.ArrayList;
 
 public class Player {
@@ -38,6 +37,7 @@ public class Player {
             System.out.print((i+1) + ". " + cardsInHand.get(i).getName() + "   ");
         }
     }
+
     public int getPlayerID(){
         return this.playerID;
     }

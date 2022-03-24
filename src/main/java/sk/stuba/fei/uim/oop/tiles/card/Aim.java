@@ -5,9 +5,11 @@ import sk.stuba.fei.uim.oop.game.Game;
 
 public class Aim extends Card {
     public final String name = "Aim";
+
     public Aim(){
         super.name = this.name;
     }
+
     @Override
     public void activate(Game game) {
         int index = ZKlavesnice.readInt("Select the index of target: ")-1;
