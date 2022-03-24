@@ -48,7 +48,7 @@ public class Game {
             turn++;
         }
         int winner = this.getWinner();
-        System.out.println("Player " + (winner+1) + " wins!");
+        System.out.println("Player " + (winner) + " wins!");
     }
 
     public void checkDeadPlayers(){
@@ -56,16 +56,6 @@ public class Game {
             if (!this.players.get(i).isAlive()){
                 for(int j=0;j<3;j++){
                     this.cardStack.add(this.players.get(i).cardsInHand.get(j));
-                }
-                for (int k=0;k<this.pond.size();k++){
-                    if (this.pond.get(k).getOwner() == k+1){
-                        this.pond.remove(k);
-                    }
-                }
-                for (int l=0;l<this.tileCardsStack.size();l++){
-                    if (this.tileCardsStack.get(l).getOwner() == l+1){
-                        this.tileCardsStack.remove(l);
-                    }
                 }
             }
         }
@@ -171,7 +161,7 @@ public class Game {
         for (int i = 0; i < this.numOfPlayers; i++) {
             if (players.get(i).getLives() > 0) {
                 activePlayers += 1;
-                winner = i;
+                winner = i+1;
             }
         }
         if (activePlayers == 1) {
